@@ -12,6 +12,14 @@
 		947FA80821732869009ED7AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 947FA80621732869009ED7AF /* Main.storyboard */; };
 		947FA80A2173286B009ED7AF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 947FA8092173286B009ED7AF /* Assets.xcassets */; };
 		947FA80D2173286B009ED7AF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 947FA80B2173286B009ED7AF /* LaunchScreen.storyboard */; };
+		947FA81521733482009ED7AF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 947FA81421733482009ED7AF /* GoogleService-Info.plist */; };
+		947FA81E21734579009ED7AF /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947FA81D21734579009ED7AF /* Category.swift */; };
+		947FA820217348E3009ED7AF /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947FA81F217348E3009ED7AF /* FirebaseManager.swift */; };
+		94B1DC03217C8B800080F892 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B1DC02217C8B800080F892 /* User.swift */; };
+		94B1DC05217C928E0080F892 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B1DC04217C928E0080F892 /* Constants.swift */; };
+		94B1DC07217CABB50080F892 /* FirebaseManger+Observers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B1DC06217CABB50080F892 /* FirebaseManger+Observers.swift */; };
+		94B5232B2179B166004EF188 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B5232A2179B166004EF188 /* Utility.swift */; };
+		E9138A1156BAB2FF6FBFDF0A /* Pods_DailySpend.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8133194BA64BDD3419DDA62 /* Pods_DailySpend.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +30,16 @@
 		947FA8092173286B009ED7AF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		947FA80C2173286B009ED7AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		947FA80E2173286B009ED7AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		947FA81421733482009ED7AF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		947FA81D21734579009ED7AF /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		947FA81F217348E3009ED7AF /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		94B1DC02217C8B800080F892 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		94B1DC04217C928E0080F892 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		94B1DC06217CABB50080F892 /* FirebaseManger+Observers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseManger+Observers.swift"; sourceTree = "<group>"; };
+		94B5232A2179B166004EF188 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		E1C5F0E3F75D8637CF6EC32C /* Pods-DailySpend.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailySpend.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DailySpend/Pods-DailySpend.debug.xcconfig"; sourceTree = "<group>"; };
+		F1006929D48B09F07D4F357B /* Pods-DailySpend.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DailySpend.release.xcconfig"; path = "Pods/Target Support Files/Pods-DailySpend/Pods-DailySpend.release.xcconfig"; sourceTree = "<group>"; };
+		F8133194BA64BDD3419DDA62 /* Pods_DailySpend.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DailySpend.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +47,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9138A1156BAB2FF6FBFDF0A /* Pods_DailySpend.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C5E926BA2C7AD0B549D2921 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E1C5F0E3F75D8637CF6EC32C /* Pods-DailySpend.debug.xcconfig */,
+				F1006929D48B09F07D4F357B /* Pods-DailySpend.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		2B07453CBA6B8A7FDE4FF975 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F8133194BA64BDD3419DDA62 /* Pods_DailySpend.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		947FA7F621732869009ED7AF = {
 			isa = PBXGroup;
 			children = (
 				947FA80121732869009ED7AF /* DailySpend */,
 				947FA80021732869009ED7AF /* Products */,
+				0C5E926BA2C7AD0B549D2921 /* Pods */,
+				2B07453CBA6B8A7FDE4FF975 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +92,77 @@
 		947FA80121732869009ED7AF /* DailySpend */ = {
 			isa = PBXGroup;
 			children = (
-				947FA80221732869009ED7AF /* AppDelegate.swift */,
+				947FA81C217344FE009ED7AF /* Utility */,
+				947FA81B217344F3009ED7AF /* Others */,
+				947FA81A217344E6009ED7AF /* Resources */,
+				947FA819217344D0009ED7AF /* Controller */,
+				947FA818217344C8009ED7AF /* View */,
+				947FA817217344BE009ED7AF /* Model */,
+				947FA816217344A9009ED7AF /* Firebase */,
+			);
+			path = DailySpend;
+			sourceTree = "<group>";
+		};
+		947FA816217344A9009ED7AF /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				947FA81421733482009ED7AF /* GoogleService-Info.plist */,
+				947FA81F217348E3009ED7AF /* FirebaseManager.swift */,
+				94B1DC06217CABB50080F892 /* FirebaseManger+Observers.swift */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
+		947FA817217344BE009ED7AF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				947FA81D21734579009ED7AF /* Category.swift */,
+				94B1DC02217C8B800080F892 /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		947FA818217344C8009ED7AF /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		947FA819217344D0009ED7AF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
 				947FA80421732869009ED7AF /* ViewController.swift */,
-				947FA80621732869009ED7AF /* Main.storyboard */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		947FA81A217344E6009ED7AF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
 				947FA8092173286B009ED7AF /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		947FA81B217344F3009ED7AF /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				947FA80221732869009ED7AF /* AppDelegate.swift */,
+				947FA80621732869009ED7AF /* Main.storyboard */,
 				947FA80B2173286B009ED7AF /* LaunchScreen.storyboard */,
 				947FA80E2173286B009ED7AF /* Info.plist */,
 			);
-			path = DailySpend;
+			path = Others;
+			sourceTree = "<group>";
+		};
+		947FA81C217344FE009ED7AF /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				94B5232A2179B166004EF188 /* Utility.swift */,
+				94B1DC04217C928E0080F892 /* Constants.swift */,
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +172,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 947FA8112173286B009ED7AF /* Build configuration list for PBXNativeTarget "DailySpend" */;
 			buildPhases = (
+				6B68B95A44657E6C80CC14FE /* [CP] Check Pods Manifest.lock */,
 				947FA7FB21732869009ED7AF /* Sources */,
 				947FA7FC21732869009ED7AF /* Frameworks */,
 				947FA7FD21732869009ED7AF /* Resources */,
+				397B15508F157EB031D0E816 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -125,17 +228,67 @@
 				947FA80D2173286B009ED7AF /* LaunchScreen.storyboard in Resources */,
 				947FA80A2173286B009ED7AF /* Assets.xcassets in Resources */,
 				947FA80821732869009ED7AF /* Main.storyboard in Resources */,
+				947FA81521733482009ED7AF /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		397B15508F157EB031D0E816 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-DailySpend/Pods-DailySpend-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DailySpend/Pods-DailySpend-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6B68B95A44657E6C80CC14FE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DailySpend-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		947FA7FB21732869009ED7AF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94B5232B2179B166004EF188 /* Utility.swift in Sources */,
+				947FA820217348E3009ED7AF /* FirebaseManager.swift in Sources */,
+				94B1DC07217CABB50080F892 /* FirebaseManger+Observers.swift in Sources */,
+				94B1DC03217C8B800080F892 /* User.swift in Sources */,
 				947FA80521732869009ED7AF /* ViewController.swift in Sources */,
+				94B1DC05217C928E0080F892 /* Constants.swift in Sources */,
+				947FA81E21734579009ED7AF /* Category.swift in Sources */,
 				947FA80321732869009ED7AF /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -280,15 +433,16 @@
 		};
 		947FA8122173286B009ED7AF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E1C5F0E3F75D8637CF6EC32C /* Pods-DailySpend.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = DailySpend/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/DailySpend/Others/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.outect.DailySpend;
+				PRODUCT_BUNDLE_IDENTIFIER = com.outect.dailyspend;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -297,15 +451,16 @@
 		};
 		947FA8132173286B009ED7AF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F1006929D48B09F07D4F357B /* Pods-DailySpend.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = DailySpend/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/DailySpend/Others/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.outect.DailySpend;
+				PRODUCT_BUNDLE_IDENTIFIER = com.outect.dailyspend;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
