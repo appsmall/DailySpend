@@ -53,6 +53,7 @@ class ViewController: UIViewController {
 //        FirebaseManager.shared.calculateDailySpend(userId: "zLcehL4UCINao3azsJtGyrujXQ03", date: "18-10-2018")
 //    }
     
+    
     //MARK:- Fetch, Update and delete Category
     func addNewCategoryWithSubCategory(){
         let category = Category.init(name: "Bills", subcategory: ["Newspaper","Electricity"], icon: "")
