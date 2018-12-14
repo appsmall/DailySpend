@@ -10,6 +10,10 @@ import UIKit
 
 class LoginVC: UIViewController {
 
+    struct Storyboard {
+        static let signInVCToForgotPwdVC = "signInVCToForgotPwdVC"
+        static let signinVCToSignupVC = "signinVCToSignupVC"
+    }
     
     @IBOutlet weak var emailView: UIView!
     @IBOutlet weak var emailTFView: UIView!
@@ -20,8 +24,12 @@ class LoginVC: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var forgotPassword: UIButton!
     @IBOutlet weak var createNewAccount: UIButton!
-    @IBOutlet weak var userIconWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var passwordIconWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var userTFTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var passwordTFLeadingConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var semiCircleView: UIView!
+    @IBOutlet weak var semiCircleViewWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var semiCircleViewHeightConstraint: NSLayoutConstraint!
     
     
     // MARK:- VIEW CONTROLLER METHODS
@@ -45,7 +53,7 @@ class LoginVC: UIViewController {
     
     func userNameViewCovered() {
         UIView.animate(withDuration: 0.2) {
-            self.userIconWidthConstraint.constant = 0
+            self.userTFTrailingConstraint.constant = 0
             self.emailTFView.backgroundColor = UIColor(red: 117/255, green: 95/255, blue: 82/255, alpha: 1)
             self.view.layoutIfNeeded()
         }
@@ -53,7 +61,7 @@ class LoginVC: UIViewController {
     
     func passwordViewCovered() {
         UIView.animate(withDuration: 0.2) {
-            self.passwordIconWidthConstraint.constant = 0
+            self.passwordTFLeadingConstraint.constant = 0
             self.passwordTFView.backgroundColor = UIColor(red: 117/255, green: 95/255, blue: 82/255, alpha: 1)
             self.view.layoutIfNeeded()
         }
@@ -61,7 +69,7 @@ class LoginVC: UIViewController {
     
     func userNameViewUncovered() {
         UIView.animate(withDuration: 0.2) {
-            self.userIconWidthConstraint.constant = 60
+            self.userTFTrailingConstraint.constant = 60
             self.emailTFView.backgroundColor = UIColor(red: 128/255, green: 105/255, blue: 87/255, alpha: 1)
             self.view.layoutIfNeeded()
         }
@@ -69,7 +77,7 @@ class LoginVC: UIViewController {
     
     func passwordViewUncovered() {
         UIView.animate(withDuration: 0.2) {
-            self.passwordIconWidthConstraint.constant = 60
+            self.passwordTFLeadingConstraint.constant = 60
             self.passwordTFView.backgroundColor = UIColor(red: 128/255, green: 105/255, blue: 87/255, alpha: 1)
             self.view.layoutIfNeeded()
         }
@@ -80,9 +88,11 @@ class LoginVC: UIViewController {
     }
     
     @IBAction func forgotPwdBtnPressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: Storyboard.signInVCToForgotPwdVC, sender: nil)
     }
     
     @IBAction func createNewAccountBtnPressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: Storyboard.signinVCToSignupVC, sender: nil)
     }
     
 }
