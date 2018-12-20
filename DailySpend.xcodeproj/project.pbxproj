@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18162A1921CB807B00274516 /* DashboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18162A1821CB807B00274516 /* DashboardVC.swift */; };
 		8AEA95D621C25F9B006EBB39 /* ForgotPwdVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEA95D521C25F9B006EBB39 /* ForgotPwdVC.swift */; };
 		8AEA95D821C267C9006EBB39 /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEA95D721C267C9006EBB39 /* SignupVC.swift */; };
 		8AF9793621BBD41C005C3194 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF9793521BBD41C005C3194 /* Extension.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18162A1821CB807B00274516 /* DashboardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardVC.swift; sourceTree = "<group>"; };
 		8AEA95D521C25F9B006EBB39 /* ForgotPwdVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPwdVC.swift; sourceTree = "<group>"; };
 		8AEA95D721C267C9006EBB39 /* SignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
 		8AF9793521BBD41C005C3194 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				8AF9793721BBD497005C3194 /* LoginVC.swift */,
 				8AEA95D521C25F9B006EBB39 /* ForgotPwdVC.swift */,
 				8AEA95D721C267C9006EBB39 /* SignupVC.swift */,
+				18162A1821CB807B00274516 /* DashboardVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8AEA95D821C267C9006EBB39 /* SignupVC.swift in Sources */,
+				18162A1921CB807B00274516 /* DashboardVC.swift in Sources */,
 				8AF9793621BBD41C005C3194 /* Extension.swift in Sources */,
 				94B5232B2179B166004EF188 /* Utility.swift in Sources */,
 				947FA820217348E3009ED7AF /* FirebaseManager.swift in Sources */,
