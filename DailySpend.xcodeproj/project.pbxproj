@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		18162A1921CB807B00274516 /* DashboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18162A1821CB807B00274516 /* DashboardVC.swift */; };
+		2FA01A8021D756750085616E /* NavigationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA01A7F21D756750085616E /* NavigationVC.swift */; };
+		2FA01A8221D758A30085616E /* AddSpendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA01A8121D758A30085616E /* AddSpendVC.swift */; };
+		2FA01A8421D758B70085616E /* CategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA01A8321D758B70085616E /* CategoryVC.swift */; };
+		2FA01A8621D758C50085616E /* SpendDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA01A8521D758C50085616E /* SpendDetailsVC.swift */; };
+		2FA01A8821D758CE0085616E /* ReportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA01A8721D758CE0085616E /* ReportVC.swift */; };
+		2FA01A8A21D75AFD0085616E /* ContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA01A8921D75AFD0085616E /* ContainerVC.swift */; };
+		2FA01A8C21D75FCD0085616E /* RoundCornerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA01A8B21D75FCD0085616E /* RoundCornerView.swift */; };
 		8AEA95D621C25F9B006EBB39 /* ForgotPwdVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEA95D521C25F9B006EBB39 /* ForgotPwdVC.swift */; };
 		8AEA95D821C267C9006EBB39 /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEA95D721C267C9006EBB39 /* SignupVC.swift */; };
 		8AF9793621BBD41C005C3194 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF9793521BBD41C005C3194 /* Extension.swift */; };
@@ -29,6 +36,13 @@
 
 /* Begin PBXFileReference section */
 		18162A1821CB807B00274516 /* DashboardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardVC.swift; sourceTree = "<group>"; };
+		2FA01A7F21D756750085616E /* NavigationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationVC.swift; sourceTree = "<group>"; };
+		2FA01A8121D758A30085616E /* AddSpendVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSpendVC.swift; sourceTree = "<group>"; };
+		2FA01A8321D758B70085616E /* CategoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryVC.swift; sourceTree = "<group>"; };
+		2FA01A8521D758C50085616E /* SpendDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendDetailsVC.swift; sourceTree = "<group>"; };
+		2FA01A8721D758CE0085616E /* ReportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportVC.swift; sourceTree = "<group>"; };
+		2FA01A8921D75AFD0085616E /* ContainerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerVC.swift; sourceTree = "<group>"; };
+		2FA01A8B21D75FCD0085616E /* RoundCornerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundCornerView.swift; sourceTree = "<group>"; };
 		8AEA95D521C25F9B006EBB39 /* ForgotPwdVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPwdVC.swift; sourceTree = "<group>"; };
 		8AEA95D721C267C9006EBB39 /* SignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
 		8AF9793521BBD41C005C3194 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
@@ -135,6 +149,7 @@
 		947FA818217344C8009ED7AF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2FA01A8B21D75FCD0085616E /* RoundCornerView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -146,7 +161,13 @@
 				8AF9793721BBD497005C3194 /* LoginVC.swift */,
 				8AEA95D521C25F9B006EBB39 /* ForgotPwdVC.swift */,
 				8AEA95D721C267C9006EBB39 /* SignupVC.swift */,
+				2FA01A8921D75AFD0085616E /* ContainerVC.swift */,
 				18162A1821CB807B00274516 /* DashboardVC.swift */,
+				2FA01A7F21D756750085616E /* NavigationVC.swift */,
+				2FA01A8121D758A30085616E /* AddSpendVC.swift */,
+				2FA01A8321D758B70085616E /* CategoryVC.swift */,
+				2FA01A8521D758C50085616E /* SpendDetailsVC.swift */,
+				2FA01A8721D758CE0085616E /* ReportVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -297,16 +318,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FA01A8021D756750085616E /* NavigationVC.swift in Sources */,
 				8AEA95D821C267C9006EBB39 /* SignupVC.swift in Sources */,
+				2FA01A8421D758B70085616E /* CategoryVC.swift in Sources */,
 				18162A1921CB807B00274516 /* DashboardVC.swift in Sources */,
+				2FA01A8C21D75FCD0085616E /* RoundCornerView.swift in Sources */,
+				2FA01A8821D758CE0085616E /* ReportVC.swift in Sources */,
+				2FA01A8A21D75AFD0085616E /* ContainerVC.swift in Sources */,
 				8AF9793621BBD41C005C3194 /* Extension.swift in Sources */,
 				94B5232B2179B166004EF188 /* Utility.swift in Sources */,
 				947FA820217348E3009ED7AF /* FirebaseManager.swift in Sources */,
 				94B1DC07217CABB50080F892 /* FirebaseManger+Observers.swift in Sources */,
 				8AF9793821BBD497005C3194 /* LoginVC.swift in Sources */,
+				2FA01A8221D758A30085616E /* AddSpendVC.swift in Sources */,
 				94B1DC03217C8B800080F892 /* User.swift in Sources */,
 				947FA80521732869009ED7AF /* ViewController.swift in Sources */,
 				8AEA95D621C25F9B006EBB39 /* ForgotPwdVC.swift in Sources */,
+				2FA01A8621D758C50085616E /* SpendDetailsVC.swift in Sources */,
 				94B1DC05217C928E0080F892 /* Constants.swift in Sources */,
 				947FA81E21734579009ED7AF /* Category.swift in Sources */,
 				947FA80321732869009ED7AF /* AppDelegate.swift in Sources */,
@@ -457,14 +485,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = GH8XNHRZQV;
+				DEVELOPMENT_TEAM = YLYLFCEME4;
 				INFOPLIST_FILE = "$(SRCROOT)/DailySpend/Others/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.outect.dailyspend;
+				PRODUCT_BUNDLE_IDENTIFIER = com.outect.dailyspend1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -477,14 +505,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = GH8XNHRZQV;
+				DEVELOPMENT_TEAM = YLYLFCEME4;
 				INFOPLIST_FILE = "$(SRCROOT)/DailySpend/Others/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.outect.dailyspend;
+				PRODUCT_BUNDLE_IDENTIFIER = com.outect.dailyspend1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

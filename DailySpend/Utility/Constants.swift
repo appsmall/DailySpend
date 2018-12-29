@@ -9,3 +9,14 @@
 import Foundation
 
 let emptyString = ""
+let storyboardIdParam = "VC"
+
+
+// MARK:- STORYBOARD ID's
+struct StoryboardId {
+    static let dashboardVC = "DashboardVC"
+    static let addSpendVC = "AddSpendVC"
+    static let categoryVC = "CategoryVC"
+    static let spendDetailVC = "SpendDetailsVC"
+    static let reportVC = "ReportVC"
+}
