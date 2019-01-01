@@ -36,8 +36,8 @@ extension UIView {
     
 }
 
+// MARK:- UIBUTTON
 extension UIButton {
-    
     func textShadow() {
         self.titleLabel?.layer.shouldRasterize = true
         self.titleLabel?.layer.shadowRadius = 1.0
@@ -46,5 +46,11 @@ extension UIButton {
         self.setTitleShadowColor(UIColor.lightGray, for: .normal)
         
     }
-    
+}
+
+// MARK:- UICOLOR
+extension UIColor {
+    static func rgb(red: CGFloat, green: CGFloat, blue: CGFloat) -> UIColor {
+        return UIColor.init(red: red/255, green: green/255, blue: blue/255, alpha: 1.0)
+    }
 }

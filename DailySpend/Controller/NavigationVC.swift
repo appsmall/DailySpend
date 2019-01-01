@@ -11,6 +11,9 @@ import UIKit
 class NavigationVC: UINavigationController {
 
     
+    weak var containerVC: ContainerVC?
+    
+    
     // MARK:- VIEW CONTROLLER METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
