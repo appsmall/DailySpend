@@ -9,11 +9,19 @@
 import UIKit
 
 class ContainerVC: UIViewController {
-
+    struct Storyboard {
+        static let containerVCToNavigationVC = "ContainerVCToNavigationVC"
+    }
     
+    
+    // MARK:- VIEW CONTROLLER METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
         
+    }
+    
+    deinit {
+        print("CategoryVC is destroyed")
     }
     
 
@@ -38,4 +46,12 @@ class ContainerVC: UIViewController {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LoadViewController"), object: nil, userInfo: [storyboardIdParam: StoryboardId.reportVC])
     }
     
+    // MARK:- NAVIGATION
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Storyboard.containerVCToNavigationVC {
+            if let destination = segue.destination as? NavigationVC {
+                destination.containerVC = self
+            }
+        }
+    }
 }

@@ -171,9 +171,9 @@
 				2FA01A7F21D756750085616E /* NavigationVC.swift */,
 				2FA01A8121D758A30085616E /* AddSpendVC.swift */,
 				2FA01A8321D758B70085616E /* CategoryVC.swift */,
+				181A3D9A21DB2D710079C473 /* AddCategoryVC.swift */,
 				2FA01A8521D758C50085616E /* SpendDetailsVC.swift */,
 				2FA01A8721D758CE0085616E /* ReportVC.swift */,
-				181A3D9A21DB2D710079C473 /* AddCategoryVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

@@ -40,7 +40,7 @@ class NavigationVC: UINavigationController {
                         }
                         else {
                             // Set selected view controller in the navigation stack
-                            self.setViewControllers([selectedVC], animated: true)
+                            self.setViewControllers([selectedVC], animated: false)
                         }
                     }
                 }
