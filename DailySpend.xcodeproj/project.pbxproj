@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		18162A1921CB807B00274516 /* DashboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18162A1821CB807B00274516 /* DashboardVC.swift */; };
+		1816E85A21DE31DA0049EDC5 /* TabBarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1816E85921DE31DA0049EDC5 /* TabBarCell.swift */; };
+		181A3D9921DB26160079C473 /* MyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181A3D9821DB26160079C473 /* MyView.swift */; };
+		181A3D9B21DB2D710079C473 /* AddCategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181A3D9A21DB2D710079C473 /* AddCategoryVC.swift */; };
 		2FA01A8021D756750085616E /* NavigationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA01A7F21D756750085616E /* NavigationVC.swift */; };
 		2FA01A8221D758A30085616E /* AddSpendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA01A8121D758A30085616E /* AddSpendVC.swift */; };
 		2FA01A8421D758B70085616E /* CategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA01A8321D758B70085616E /* CategoryVC.swift */; };
@@ -36,6 +39,9 @@
 
 /* Begin PBXFileReference section */
 		18162A1821CB807B00274516 /* DashboardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardVC.swift; sourceTree = "<group>"; };
+		1816E85921DE31DA0049EDC5 /* TabBarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCell.swift; sourceTree = "<group>"; };
+		181A3D9821DB26160079C473 /* MyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyView.swift; sourceTree = "<group>"; };
+		181A3D9A21DB2D710079C473 /* AddCategoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryVC.swift; sourceTree = "<group>"; };
 		2FA01A7F21D756750085616E /* NavigationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationVC.swift; sourceTree = "<group>"; };
 		2FA01A8121D758A30085616E /* AddSpendVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSpendVC.swift; sourceTree = "<group>"; };
 		2FA01A8321D758B70085616E /* CategoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryVC.swift; sourceTree = "<group>"; };
@@ -150,6 +156,8 @@
 			isa = PBXGroup;
 			children = (
 				2FA01A8B21D75FCD0085616E /* RoundCornerView.swift */,
+				181A3D9821DB26160079C473 /* MyView.swift */,
+				1816E85921DE31DA0049EDC5 /* TabBarCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -166,6 +174,7 @@
 				2FA01A7F21D756750085616E /* NavigationVC.swift */,
 				2FA01A8121D758A30085616E /* AddSpendVC.swift */,
 				2FA01A8321D758B70085616E /* CategoryVC.swift */,
+				181A3D9A21DB2D710079C473 /* AddCategoryVC.swift */,
 				2FA01A8521D758C50085616E /* SpendDetailsVC.swift */,
 				2FA01A8721D758CE0085616E /* ReportVC.swift */,
 			);
@@ -318,10 +327,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				181A3D9921DB26160079C473 /* MyView.swift in Sources */,
 				2FA01A8021D756750085616E /* NavigationVC.swift in Sources */,
 				8AEA95D821C267C9006EBB39 /* SignupVC.swift in Sources */,
 				2FA01A8421D758B70085616E /* CategoryVC.swift in Sources */,
 				18162A1921CB807B00274516 /* DashboardVC.swift in Sources */,
+				1816E85A21DE31DA0049EDC5 /* TabBarCell.swift in Sources */,
 				2FA01A8C21D75FCD0085616E /* RoundCornerView.swift in Sources */,
 				2FA01A8821D758CE0085616E /* ReportVC.swift in Sources */,
 				2FA01A8A21D75AFD0085616E /* ContainerVC.swift in Sources */,
@@ -333,6 +344,7 @@
 				2FA01A8221D758A30085616E /* AddSpendVC.swift in Sources */,
 				94B1DC03217C8B800080F892 /* User.swift in Sources */,
 				947FA80521732869009ED7AF /* ViewController.swift in Sources */,
+				181A3D9B21DB2D710079C473 /* AddCategoryVC.swift in Sources */,
 				8AEA95D621C25F9B006EBB39 /* ForgotPwdVC.swift in Sources */,
 				2FA01A8621D758C50085616E /* SpendDetailsVC.swift in Sources */,
 				94B1DC05217C928E0080F892 /* Constants.swift in Sources */,
@@ -485,7 +497,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = YLYLFCEME4;
+				DEVELOPMENT_TEAM = T6AEXAF5C6;
 				INFOPLIST_FILE = "$(SRCROOT)/DailySpend/Others/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -505,7 +517,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = YLYLFCEME4;
+				DEVELOPMENT_TEAM = T6AEXAF5C6;
 				INFOPLIST_FILE = "$(SRCROOT)/DailySpend/Others/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (

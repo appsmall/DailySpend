@@ -20,3 +20,18 @@ struct StoryboardId {
     static let spendDetailVC = "SpendDetailsVC"
     static let reportVC = "ReportVC"
 }
+
+// MARK:- ALERT
+struct Alert {
+    static let alert = "Alert"
+    static let ok = "Ok"
+    static let cancel = "Cancel"
+}
+
+struct Menu {
+    static let dashboard = "Dashboard"
+    static let addSpend = "Add Spend"
+    static let category = "Category"
+    static let spendDetails = "Spend Details"
+    static let report = "Report"
+}

@@ -8,74 +8,151 @@
 
 import UIKit
 
-class CategoryVC: UIViewController {
-    
-    @IBOutlet weak var categoryView: RoundCornerView!
-    @IBOutlet weak var categoryLabel: UILabel!
-    
-    
-    lazy var pickerView: UIPickerView = {
-        let pickerView = UIPickerView()
-        pickerView.backgroundColor = UIColor.lightGray
-        pickerView.showsSelectionIndicator = true
-        pickerView.dataSource = self
-        pickerView.delegate = self
-        return pickerView
-    }()
-    var pickerViewBottomConstraint: NSLayoutConstraint!
-    let categoryArray = ["Household", "Petrol/Diesel", "Funds"]
-    
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        
-        setupPickerViewConstraints()
-    }
-    
-    func setupPickerViewConstraints() {
-        self.view.addSubview(pickerView)
-        pickerView.translatesAutoresizingMaskIntoConstraints = false
-        pickerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        pickerView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        pickerView.heightAnchor.constraint(equalToConstant: 200).isActive = true
-        pickerViewBottomConstraint = pickerView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 200)
-        pickerViewBottomConstraint.isActive = true
-    }
-    
-    
-    @IBAction func categoryViewTapped(_ sender: UITapGestureRecognizer) {
-        UIView.animate(withDuration: 0.3, animations: {
-            self.pickerViewBottomConstraint.constant = 0
-            self.view.layoutIfNeeded()
-        })
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(doneWithPickerView))
-        view.addGestureRecognizer(tapGesture)
-    }
-    
-    @objc func doneWithPickerView() {
-        UIView.animate(withDuration: 0.3, animations: {
-            self.pickerViewBottomConstraint.constant = 200
-            self.view.layoutIfNeeded()
-        })
-    }
-
+// Structure used for the categories model array
+struct ExpandableNames {
+    var isExpanded: Bool
+    let category : String
+    let subCategory: [String]
 }
 
-extension CategoryVC: UIPickerViewDataSource, UIPickerViewDelegate {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
+class CategoryVC: UIViewController {
+    struct Storyboard {
+        static let kCellId = "CategoryCell"
+        static let categoryVCToAddCategoryVC = "categoryVCToAddCategoryVC"
     }
     
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return categoryArray.count
+    @IBOutlet weak var categoryTableView: UITableView!
+    
+    var categories = [
+        ExpandableNames(isExpanded: true, category: "Grocery", subCategory: ["Misc", "Others"]),
+        ExpandableNames(isExpanded: true, category: "Petrol/Diesel", subCategory: ["Bike", "Scooty", "Car", "Bus", "Truck"]),
+        ExpandableNames(isExpanded: true, category: "Cloths", subCategory: ["Suit", "Blazzer", "Western Dress", "Jeans"])
+    ]
+    
+    // MARK:- VIEW CONTROLLER METHODS
+    override func viewDidLoad() {
+        super.viewDidLoad()
     }
     
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return categoryArray[row]
+    
+    // MARK:- IBACTIONS
+    @IBAction func addCategoryBtnPressed(_ sender: UIButton) {
+        self.performSegue(withIdentifier: Storyboard.categoryVCToAddCategoryVC, sender: nil)
+    }
+}
+
+
+// MARK:- TABLEVIEW DATASOURCE & DELEGATE METHODS
+extension CategoryVC: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let category = categories[section].category
+        
+        let headerView = MyView()
+        headerView.backgroundColor = UIColor.rgb(red: 66, green: 54, blue: 48)
+        setupHeaderView(headerView: headerView, category: category, section: section)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleCollapseExpand(gesture:)))
+        headerView.addGestureRecognizer(tapGesture)
+        
+        return headerView
     }
     
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.categoryLabel.text = categoryArray[row]
+    // MARK:- CREATE HEADER VIEW WITH INNER ELEMENTS
+    func setupHeaderView(headerView: MyView, category: String, section: Int) {
+        let label = UILabel()
+        label.text = category
+        label.textColor = UIColor.white
+        label.font = UIFont.boldSystemFont(ofSize: 18)
+        
+        let downImageView = UIImageView()
+        downImageView.image = UIImage(named: "ic_arrow_down")
+        downImageView.contentMode = .scaleToFill
+        
+        headerView.addSubview(label)
+        headerView.addSubview(downImageView)
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 10).isActive = true
+        label.trailingAnchor.constraint(equalTo: downImageView.leadingAnchor).isActive = true
+        label.topAnchor.constraint(equalTo: headerView.topAnchor).isActive = true
+        label.bottomAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
+        
+        downImageView.translatesAutoresizingMaskIntoConstraints = false
+        downImageView.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -10).isActive = true
+        downImageView.centerYAnchor.constraint(equalTo: headerView.centerYAnchor).isActive = true
+        downImageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        downImageView.widthAnchor.constraint(equalToConstant: 27).isActive = true
+        
+        headerView.tag = section
+        headerView.imageView = downImageView
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = UIView()
+        footerView.backgroundColor = UIColor.clear
+        return footerView
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return categories.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if !categories[section].isExpanded {
+            return 0
+        }
+        return categories[section].subCategory.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.kCellId, for: indexPath)
+        let name = categories[indexPath.section].subCategory[indexPath.row]
+        cell.textLabel?.text = name
+        cell.textLabel?.textColor = UIColor.white
+        cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        return cell
+    }
+    
+    // MARK:- HANDLE EXPAND & COLLAPSE OF TABLE VIEW SECTIONS
+    @objc func handleCollapseExpand(gesture: UITapGestureRecognizer) {
+        guard let view = gesture.view as? MyView else{
+            return
+        }
+        let section = view.tag
+        
+        // we'll try to close the section first by deleting the rows
+        var indexPaths = [IndexPath]()
+        for row in categories[section].subCategory.indices {
+            let indexPath = IndexPath(row: row, section: section)
+            indexPaths.append(indexPath)
+        }
+        
+        let isExpanded = categories[section].isExpanded
+        categories[section].isExpanded = !isExpanded
+        
+        if isExpanded {
+            categoryTableView.deleteRows(at: indexPaths, with: .fade)
+            UIView.animate(withDuration: 0.3) {
+                view.imageView?.transform = CGAffineTransform(rotationAngle: .pi / -2)
+            }
+        } else {
+            categoryTableView.insertRows(at: indexPaths, with: .fade)
+            UIView.animate(withDuration: 0.3) {
+                view.imageView?.transform = CGAffineTransform.identity
+            }
+        }
+    }
+    
+    // MARK:- SET TABLE VIEW CONTENT & VIEW HEIGHTS
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
     }
 }

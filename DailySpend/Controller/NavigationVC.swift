@@ -11,6 +11,9 @@ import UIKit
 class NavigationVC: UINavigationController {
 
     
+    weak var containerVC: ContainerVC?
+    
+    
     // MARK:- VIEW CONTROLLER METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +40,7 @@ class NavigationVC: UINavigationController {
                         }
                         else {
                             // Set selected view controller in the navigation stack
-                            self.setViewControllers([selectedVC], animated: true)
+                            self.setViewControllers([selectedVC], animated: false)
                         }
                     }
                 }
