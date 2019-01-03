@@ -6,7 +6,7 @@
 //  Copyright © 2018 outect. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class Utility{
     
@@ -39,6 +39,15 @@ class Utility{
             return "Error"
         }
         
+    }
+    
+    // MARK:- ALERT CONTROLLER
+    static func alert(on: UIViewController, title: String, message: String, withActions:[UIAlertAction], style: UIAlertController.Style) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: style)
+        for action in withActions {
+            alert.addAction(action)
+        }
+        on.present(alert, animated: true, completion: nil)
     }
     
 }
