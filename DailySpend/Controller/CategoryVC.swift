@@ -25,7 +25,7 @@ class CategoryVC: UIViewController {
     
     var categories = [
         ExpandableNames(isExpanded: true, category: "Grocery", subCategory: ["Misc", "Others"]),
-        ExpandableNames(isExpanded: true, category: "Petrol/Diesel", subCategory: ["Bike", "Scooty", "Car", "Bus", "Truck"]),
+        ExpandableNames(isExpanded: false, category: "Petrol/Diesel", subCategory: ["Bike", "Scooty", "Car", "Bus", "Truck"]),
         ExpandableNames(isExpanded: true, category: "Cloths", subCategory: ["Suit", "Blazzer", "Western Dress", "Jeans"])
     ]
     
@@ -46,10 +46,11 @@ class CategoryVC: UIViewController {
 extension CategoryVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let category = categories[section].category
+        let isExpand = categories[section].isExpanded
         
         let headerView = MyView()
         headerView.backgroundColor = UIColor.rgb(red: 66, green: 54, blue: 48)
-        setupHeaderView(headerView: headerView, category: category, section: section)
+        setupHeaderView(headerView: headerView, category: category, isExpand: isExpand, section: section)
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleCollapseExpand(gesture:)))
         headerView.addGestureRecognizer(tapGesture)
@@ -58,7 +59,7 @@ extension CategoryVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     // MARK:- CREATE HEADER VIEW WITH INNER ELEMENTS
-    func setupHeaderView(headerView: MyView, category: String, section: Int) {
+    func setupHeaderView(headerView: MyView, category: String, isExpand: Bool, section: Int) {
         let label = UILabel()
         label.text = category
         label.textColor = UIColor.white
@@ -85,6 +86,10 @@ extension CategoryVC: UITableViewDataSource, UITableViewDelegate {
         
         headerView.tag = section
         headerView.imageView = downImageView
+        
+        if !isExpand {
+            downImageView.transform = CGAffineTransform(rotationAngle: (.pi / -2))
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
