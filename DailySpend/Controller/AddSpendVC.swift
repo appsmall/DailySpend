@@ -11,30 +11,36 @@ import UIKit
 
 class AddSpendVC: UIViewController {
     struct Storyboard {
-        static let kCellId = "AddSpendCell"
+        static let kCategoryCellId = "CatCell"
+        static let kSubCategoryCellId = "SubCatCell"
     }
     
-    lazy var addSpendTableView: UITableView = {
+    /*lazy var addSpendTableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = UIColor.lightGray
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: Storyboard.kCellId)
         return tableView
-    }()
+    }()*/
     
     
     @IBOutlet weak var categoryView: RoundCornerView!
     @IBOutlet weak var categoryArrowImageView: UIImageView!
     @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var categoryTableView: UITableView!
+    @IBOutlet weak var categoryTableViewHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var subCategoryView: RoundCornerView!
     @IBOutlet weak var subCategoryLabel: UILabel!
     @IBOutlet weak var subCatArrowImageView: UIImageView!
+    @IBOutlet weak var subCatTableView: UITableView!
+    @IBOutlet weak var subCatTableViewHeightConstraint: NSLayoutConstraint!
     
-    var addSpendTableViewHeightConstraint: NSLayoutConstraint!
-    var addSpendTableViewTopConstraint: NSLayoutConstraint!
-    var tableViewContentHeight: CGFloat!
+    //var addSpendTableViewHeightConstraint: NSLayoutConstraint!
+    //var addSpendTableViewTopConstraint: NSLayoutConstraint!
+    var catTableViewContentHeight: CGFloat!
+    var subCatTableViewContentHeight: CGFloat!
     var isExpanded = false
     var isCategory = false
     
@@ -53,12 +59,16 @@ class AddSpendVC: UIViewController {
     func updateUI() {
         self.categoryArrowImageView.transform = CGAffineTransform(rotationAngle: .pi / -2)
         self.subCatArrowImageView.transform = CGAffineTransform(rotationAngle: .pi / -2)
-        addSpendTableView.rowHeight = UITableView.automaticDimension
+        self.view.bringSubviewToFront(categoryTableView)
+        self.view.bringSubviewToFront(subCatTableView)
+        categoryTableView.rowHeight = UITableView.automaticDimension
+        subCatTableView.rowHeight = UITableView.automaticDimension
     }
     
     // used to handle table view height according to their content-size
     @objc func updateUIAfterDelay() {
-        tableViewContentHeight = addSpendTableView.contentSize.height
+        catTableViewContentHeight = categoryTableView.contentSize.height
+        subCatTableViewContentHeight = subCatTableView.contentSize.height
     }
     
     
@@ -68,22 +78,43 @@ class AddSpendVC: UIViewController {
         
         if isOpen {
             UIView.animate(withDuration: 0.4) {
-                self.addSpendTableViewHeightConstraint.constant = 0
+                if self.isCategory {
+                    self.categoryTableViewHeightConstraint.constant = 0
+                } else {
+                    self.subCatTableViewHeightConstraint.constant = 0
+                }
                 self.view.layoutIfNeeded()
             }
         }
         else {
-            if tableViewContentHeight > viewHeight {
-                UIView.animate(withDuration: 0.5) {
-                    self.addSpendTableViewHeightConstraint.constant = viewHeight
-                    self.view.layoutIfNeeded()
+            if isCategory {
+                if catTableViewContentHeight > viewHeight {
+                    UIView.animate(withDuration: 0.5) {
+                        self.categoryTableViewHeightConstraint.constant = viewHeight
+                        self.view.layoutIfNeeded()
+                    }
+                }
+                else {
+                    UIView.animate(withDuration: 0.5) {
+                        //self.addSpendTableViewHeightConstraint.constant = self.tableViewContentHeight
+                        self.categoryTableViewHeightConstraint.constant = 250
+                        self.view.layoutIfNeeded()
+                    }
                 }
             }
             else {
-                UIView.animate(withDuration: 0.5) {
-                    //self.addSpendTableViewHeightConstraint.constant = self.tableViewContentHeight
-                    self.addSpendTableViewHeightConstraint.constant = 250
-                    self.view.layoutIfNeeded()
+                if subCatTableViewContentHeight > viewHeight {
+                    UIView.animate(withDuration: 0.5) {
+                        self.subCatTableViewHeightConstraint.constant = viewHeight
+                        self.view.layoutIfNeeded()
+                    }
+                }
+                else {
+                    UIView.animate(withDuration: 0.5) {
+                        //self.addSpendTableViewHeightConstraint.constant = self.tableViewContentHeight
+                        self.subCatTableViewHeightConstraint.constant = 250
+                        self.view.layoutIfNeeded()
+                    }
                 }
             }
         }
@@ -118,7 +149,7 @@ class AddSpendVC: UIViewController {
         }
     }
     
-    func setupTableView(topView: UIView) {
+    /*func setupTableView(topView: UIView) {
         self.view.addSubview(addSpendTableView)
         addSpendTableView.translatesAutoresizingMaskIntoConstraints = false
         addSpendTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20).isActive = true
@@ -130,22 +161,23 @@ class AddSpendVC: UIViewController {
     
     func removeTableView() {
         addSpendTableView.removeFromSuperview()
-    }
+    }*/
     
     @IBAction func categoryViewTapped(_ sender: UITapGestureRecognizer) {
-        self.removeTableView()
-        self.setupTableView(topView: categoryView)
         self.isCategory = true
-        self.addSpendTableView.reloadData()
+        self.categoryTableView.reloadData()
         self.hideTableView(selectedCategory: emptyString, arrowImageView: categoryArrowImageView)
+        
+        /*self.removeTableView()
+        self.setupTableView(topView: categoryView)*/
     }
     
     @IBAction func subCategoryViewTapped(_ sender: UITapGestureRecognizer) {
-        self.removeTableView()
-        self.setupTableView(topView: subCategoryView)
         self.isCategory = false
-        self.addSpendTableView.reloadData()
+        self.subCatTableView.reloadData()
         self.hideTableView(selectedCategory: emptyString, arrowImageView: subCatArrowImageView)
+        /*self.removeTableView()
+        self.setupTableView(topView: subCategoryView)*/
     }
     
 }
@@ -161,21 +193,29 @@ extension AddSpendVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.kCellId, for: indexPath)
         
         if isCategory {
+            let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.kCategoryCellId, for: indexPath)
             cell.textLabel?.text = categories[indexPath.row]
-            
-        } else {
-            cell.textLabel?.text = subCategories[indexPath.row]
+            return cell
         }
-        
-        tableViewContentHeight = addSpendTableView.contentSize.height
-        
-        return cell
+        else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.kSubCategoryCellId, for: indexPath)
+            cell.textLabel?.text = subCategories[indexPath.row]
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        if isCategory {
+            let selectedCategory = categories[indexPath.row]
+            categoryLabel.text = selectedCategory
+            self.hideTableView(selectedCategory: selectedCategory, arrowImageView: categoryArrowImageView)
+        }
+        else {
+            let selectedSubCategory = subCategories[indexPath.row]
+            subCategoryLabel.text = selectedSubCategory
+            self.hideTableView(selectedCategory: selectedSubCategory, arrowImageView: subCatArrowImageView)
+        }
     }
 }
