@@ -66,7 +66,7 @@ extension ContainerVC: UICollectionViewDataSource, UICollectionViewDelegate, UIC
             
         case Menu.addSpend:
             print("Add Spend")
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LoadViewController"), object: nil, userInfo: [storyboardIdParam: StoryboardId.dashboardVC])
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LoadViewController"), object: nil, userInfo: [storyboardIdParam: StoryboardId.addSpendVC])
             
         case Menu.category:
             print("Category")
