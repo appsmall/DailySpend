@@ -207,7 +207,7 @@ class AddCategoryVC: UIViewController {
 
     @IBAction func categoryViewTapped(_ sender: UITapGestureRecognizer) {
         self.view.bringSubviewToFront(categoryTableView)
-        hideTableView(selectedCategory: "")
+        hideTableView(selectedCategory: emptyString)
     }
 }
 
