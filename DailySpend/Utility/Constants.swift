@@ -35,3 +35,8 @@ struct Menu {
     static let spendDetails = "Spend Details"
     static let report = "Report"
 }
+
+// MARK:- GENERAL MESSGES
+let atleastOneOfTheFieldIsEmpty = "Atleast one of the field is empty"
+let pleaseEnterTheCategory = "Please enter the category."
+let pleaseEnterTheSubCategory = "Please enter the sub-category."

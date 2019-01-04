@@ -294,8 +294,8 @@
                             </containerView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="IAc-Lk-OwP">
                                 <rect key="frame" x="0.0" y="511" width="320" height="57"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.81999999999999995" colorSpace="custom" customColorSpace="sRGB"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Ve7-dc-alm">
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.70703125" colorSpace="custom" customColorSpace="sRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Ve7-dc-alm">
                                     <size key="itemSize" width="60" height="56"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -303,27 +303,27 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TabCell" id="pWv-Ld-VXb" customClass="TabBarCell" customModule="DailySpend" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="60" height="56"/>
+                                        <rect key="frame" x="0.0" y="0.5" width="60" height="56"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="60" height="56"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PbP-WP-YZR">
-                                                    <rect key="frame" x="20" y="10" width="20" height="20"/>
+                                                    <rect key="frame" x="21" y="10" width="18" height="18.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="PbP-WP-YZR" secondAttribute="height" multiplier="1:1" id="guy-KU-Q9t"/>
                                                     </constraints>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TZl-l8-Cd4" userLabel="Hidden Line View">
-                                                    <rect key="frame" x="0.0" y="30" width="60" height="2"/>
+                                                    <rect key="frame" x="0.0" y="28.5" width="60" height="2"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="2" id="rb5-cK-dgH"/>
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pcC-Dj-jHn">
-                                                    <rect key="frame" x="2" y="32" width="56" height="14"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                                    <rect key="frame" x="2" y="30.5" width="56" height="13"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -335,9 +335,9 @@
                                             <constraint firstItem="TZl-l8-Cd4" firstAttribute="width" secondItem="pWv-Ld-VXb" secondAttribute="width" id="AWE-kP-YVh"/>
                                             <constraint firstItem="TZl-l8-Cd4" firstAttribute="top" secondItem="PbP-WP-YZR" secondAttribute="bottom" id="Fkp-OK-p4K"/>
                                             <constraint firstItem="pcC-Dj-jHn" firstAttribute="leading" secondItem="pWv-Ld-VXb" secondAttribute="leading" constant="2" id="WMe-OZ-UI7"/>
-                                            <constraint firstItem="TZl-l8-Cd4" firstAttribute="centerY" secondItem="pWv-Ld-VXb" secondAttribute="centerY" multiplier="1.1" id="WbV-0e-273"/>
+                                            <constraint firstItem="TZl-l8-Cd4" firstAttribute="centerY" secondItem="pWv-Ld-VXb" secondAttribute="centerY" multiplier="1.05" id="WbV-0e-273"/>
                                             <constraint firstAttribute="trailing" secondItem="pcC-Dj-jHn" secondAttribute="trailing" constant="2" id="Zgt-DN-HCo"/>
-                                            <constraint firstItem="PbP-WP-YZR" firstAttribute="height" secondItem="pWv-Ld-VXb" secondAttribute="height" multiplier="0.35" id="f2n-1H-pjZ"/>
+                                            <constraint firstItem="PbP-WP-YZR" firstAttribute="height" secondItem="pWv-Ld-VXb" secondAttribute="height" multiplier="0.33" id="f2n-1H-pjZ"/>
                                             <constraint firstItem="PbP-WP-YZR" firstAttribute="centerX" secondItem="pWv-Ld-VXb" secondAttribute="centerX" id="kZB-6O-CuT"/>
                                         </constraints>
                                         <connections>

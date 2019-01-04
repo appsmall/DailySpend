@@ -43,7 +43,7 @@ class ContainerVC: UIViewController {
 
 
 // MARK:- COLLECTION VIEW DATA SOURCE & DELEGATE METHODS
-extension ContainerVC: UICollectionViewDataSource, UICollectionViewDelegate {
+extension ContainerVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return menuItems.count
     }
@@ -83,5 +83,12 @@ extension ContainerVC: UICollectionViewDataSource, UICollectionViewDelegate {
         default:
             break
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let cellWidth = self.collectionView.frame.width / 5
+        let cellHeight = self.collectionView.frame.height
+        
+        return CGSize(width: cellWidth, height: cellHeight)
     }
 }
