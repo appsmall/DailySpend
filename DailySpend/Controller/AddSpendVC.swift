@@ -37,12 +37,36 @@ class AddSpendVC: UIViewController {
     @IBOutlet weak var subCatTableView: UITableView!
     @IBOutlet weak var subCatTableViewHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var dateView: RoundCornerView!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var dateArrowImageView: UIImageView!
+    
+    lazy var datePickerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.rgb(red: 150, green: 123, blue: 106)
+        return view
+    }()
+    
+    lazy var headingDatePickerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.rgb(red: 66, green: 54, blue: 48)
+        return view
+    }()
+    var datePicker = UIDatePicker()
+    var datePickerViewXConstraint: NSLayoutConstraint!
+    var overlayView: UIView!
+    weak var containerVC: ContainerVC?
+    
+    
+    
     //var addSpendTableViewHeightConstraint: NSLayoutConstraint!
     //var addSpendTableViewTopConstraint: NSLayoutConstraint!
     var catTableViewContentHeight: CGFloat!
     var subCatTableViewContentHeight: CGFloat!
     var isExpanded = false
     var isCategory = false
+    var isTapOnView = false
+    var isDateViewExpanded = false
     
     var categories = ["A", "B", "C"]
     var subCategories = ["D", "E", "F"]
@@ -63,6 +87,9 @@ class AddSpendVC: UIViewController {
         self.view.bringSubviewToFront(subCatTableView)
         categoryTableView.rowHeight = UITableView.automaticDimension
         subCatTableView.rowHeight = UITableView.automaticDimension
+        
+        self.setupOverlayView()
+        self.setupDatePickerView()
     }
     
     // used to handle table view height according to their content-size
@@ -96,8 +123,8 @@ class AddSpendVC: UIViewController {
                 }
                 else {
                     UIView.animate(withDuration: 0.5) {
-                        //self.addSpendTableViewHeightConstraint.constant = self.tableViewContentHeight
-                        self.categoryTableViewHeightConstraint.constant = 250
+                        self.categoryTableViewHeightConstraint.constant = self.catTableViewContentHeight
+                        //self.categoryTableViewHeightConstraint.constant = 250
                         self.view.layoutIfNeeded()
                     }
                 }
@@ -111,8 +138,8 @@ class AddSpendVC: UIViewController {
                 }
                 else {
                     UIView.animate(withDuration: 0.5) {
-                        //self.addSpendTableViewHeightConstraint.constant = self.tableViewContentHeight
-                        self.subCatTableViewHeightConstraint.constant = 250
+                        self.subCatTableViewHeightConstraint.constant = self.subCatTableViewContentHeight
+                        //self.subCatTableViewHeightConstraint.constant = 250
                         self.view.layoutIfNeeded()
                     }
                 }
@@ -163,9 +190,20 @@ class AddSpendVC: UIViewController {
         addSpendTableView.removeFromSuperview()
     }*/
     
+    
     @IBAction func categoryViewTapped(_ sender: UITapGestureRecognizer) {
-        self.isCategory = true
-        self.categoryTableView.reloadData()
+        if isTapOnView {
+            isTapOnView = false
+            self.categoryView.isUserInteractionEnabled = true
+            self.subCategoryView.isUserInteractionEnabled = true
+        } else {
+            isTapOnView = true
+            
+            self.isCategory = true
+            self.categoryView.isUserInteractionEnabled = true
+            self.subCategoryView.isUserInteractionEnabled = false
+            self.categoryTableView.reloadData()
+        }
         self.hideTableView(selectedCategory: emptyString, arrowImageView: categoryArrowImageView)
         
         /*self.removeTableView()
@@ -173,11 +211,27 @@ class AddSpendVC: UIViewController {
     }
     
     @IBAction func subCategoryViewTapped(_ sender: UITapGestureRecognizer) {
-        self.isCategory = false
-        self.subCatTableView.reloadData()
+        if isTapOnView {
+            isTapOnView = false
+            self.categoryView.isUserInteractionEnabled = true
+            self.subCategoryView.isUserInteractionEnabled = true
+        }
+        else {
+            isTapOnView = true
+            
+            self.isCategory = false
+            self.categoryView.isUserInteractionEnabled = false
+            self.subCategoryView.isUserInteractionEnabled = true
+            self.subCatTableView.reloadData()
+        }
         self.hideTableView(selectedCategory: emptyString, arrowImageView: subCatArrowImageView)
+        
         /*self.removeTableView()
         self.setupTableView(topView: subCategoryView)*/
+    }
+    
+    @IBAction func dateViewTapped(_ sender: UITapGestureRecognizer) {
+        self.setupAnimationOnDateView()
     }
     
 }
@@ -217,5 +271,116 @@ extension AddSpendVC: UITableViewDataSource, UITableViewDelegate {
             subCategoryLabel.text = selectedSubCategory
             self.hideTableView(selectedCategory: selectedSubCategory, arrowImageView: subCatArrowImageView)
         }
+        
+        isTapOnView = false
+        self.categoryView.isUserInteractionEnabled = true
+        self.subCategoryView.isUserInteractionEnabled = true
+    }
+}
+
+
+// MARK:- DATE VIEW
+// SETUP BLACK OVERLAY VIEW
+// SETUP DATE VIEW & CONSTRAINTS
+// ANIMATION ON PRESENTING DATE VIEW
+// SELECTOR METHOD : DONE BUTTON ON DATE VIEW
+extension AddSpendVC {
+    func setupDatePickerView() {
+        guard let containerVC = containerVC else{
+            return
+        }
+        
+        containerVC.view.addSubview(datePickerView)
+        datePickerView.translatesAutoresizingMaskIntoConstraints = false
+        datePickerViewXConstraint = datePickerView.centerXAnchor.constraint(equalTo: containerVC.view.centerXAnchor, constant: -self.view.frame.width)
+        datePickerViewXConstraint.isActive = true
+        datePickerView.centerYAnchor.constraint(equalTo: containerVC.view.centerYAnchor).isActive = true
+        datePickerView.widthAnchor.constraint(equalTo: containerVC.view.widthAnchor, multiplier: 0.8).isActive = true
+        datePickerView.heightAnchor.constraint(equalTo: containerVC.view.heightAnchor, multiplier: 0.4).isActive = true
+        datePickerView.layer.cornerRadius = 8
+        datePickerView.layer.masksToBounds = true
+        
+        datePickerView.addSubview(headingDatePickerView)
+        headingDatePickerView.translatesAutoresizingMaskIntoConstraints = false
+        headingDatePickerView.leadingAnchor.constraint(equalTo: datePickerView.leadingAnchor).isActive = true
+        headingDatePickerView.trailingAnchor.constraint(equalTo: datePickerView.trailingAnchor).isActive = true
+        headingDatePickerView.topAnchor.constraint(equalTo: datePickerView.topAnchor).isActive = true
+        headingDatePickerView.heightAnchor.constraint(equalTo: datePickerView.heightAnchor, multiplier: 0.22).isActive = true
+        
+        datePickerView.addSubview(datePicker)
+        datePicker.translatesAutoresizingMaskIntoConstraints = false
+        datePicker.leadingAnchor.constraint(equalTo: datePickerView.leadingAnchor).isActive = true
+        datePicker.trailingAnchor.constraint(equalTo: datePickerView.trailingAnchor).isActive = true
+        datePicker.topAnchor.constraint(equalTo: headingDatePickerView.bottomAnchor).isActive = true
+        datePicker.bottomAnchor.constraint(equalTo: datePickerView.bottomAnchor).isActive = true
+        
+        let doneButton = UIButton()
+        doneButton.setTitle("Done", for: .normal)
+        doneButton.setTitleColor(UIColor.white, for: .normal)
+        doneButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        headingDatePickerView.addSubview(doneButton)
+        doneButton.translatesAutoresizingMaskIntoConstraints = false
+        doneButton.trailingAnchor.constraint(equalTo: headingDatePickerView.trailingAnchor, constant: -8).isActive = true
+        doneButton.topAnchor.constraint(equalTo: headingDatePickerView.topAnchor).isActive = true
+        doneButton.bottomAnchor.constraint(equalTo: headingDatePickerView.bottomAnchor).isActive = true
+        doneButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        doneButton.addTarget(self, action: #selector(doneBtnPressed), for: .touchUpInside)
+        
+        let selectedDateLabel = UILabel()
+        selectedDateLabel.text = "Please select date"
+        selectedDateLabel.textColor = UIColor.white
+        selectedDateLabel.font = UIFont(name: "HelveticaNeue-Medium", size: 15)
+        self.headingDatePickerView.addSubview(selectedDateLabel)
+        selectedDateLabel.translatesAutoresizingMaskIntoConstraints = false
+        selectedDateLabel.topAnchor.constraint(equalTo: headingDatePickerView.topAnchor).isActive = true
+        selectedDateLabel.bottomAnchor.constraint(equalTo: headingDatePickerView.bottomAnchor).isActive = true
+        selectedDateLabel.leadingAnchor.constraint(equalTo: headingDatePickerView.leadingAnchor, constant: 8).isActive = true
+        selectedDateLabel.trailingAnchor.constraint(equalTo: doneButton.leadingAnchor).isActive = true
+    }
+    
+    func setupOverlayView() {
+        overlayView = UIView()
+        overlayView.backgroundColor = UIColor.black
+        overlayView.alpha = 0
+        self.view.addSubview(overlayView)
+        overlayView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
+    }
+    
+    func setupAnimationOnDateView() {
+        guard let containerVC = containerVC else{
+            return
+        }
+        
+        if isDateViewExpanded {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.datePickerViewXConstraint.constant = -self.view.frame.width
+                containerVC.view.layoutIfNeeded()
+            }) { (completed) in
+                UIView.animate(withDuration: 0.3) {
+                    self.overlayView.alpha = 0
+                    containerVC.view.layoutIfNeeded()
+                }
+            }
+            
+            isDateViewExpanded = false
+        }
+        else {
+            
+            UIView.animate(withDuration: 0.3, animations: {
+                self.overlayView.alpha = 0.8
+                containerVC.view.layoutIfNeeded()
+            }) { (completed) in
+                UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.3, initialSpringVelocity: 6, options: .curveEaseInOut, animations: {
+                    self.datePickerViewXConstraint.constant = 0
+                    containerVC.view.layoutIfNeeded()
+                }, completion: nil)
+            }
+            
+            isDateViewExpanded = true
+        }
+    }
+    
+    @objc func doneBtnPressed() {
+        setupAnimationOnDateView()
     }
 }
