@@ -40,6 +40,7 @@ class AddSpendVC: UIViewController {
     @IBOutlet weak var dateView: RoundCornerView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var dateArrowImageView: UIImageView!
+    @IBOutlet weak var amountTextField: UITextField!
     
     lazy var datePickerView: UIView = {
         let view = UIView()
@@ -307,12 +308,25 @@ extension AddSpendVC {
         headingDatePickerView.topAnchor.constraint(equalTo: datePickerView.topAnchor).isActive = true
         headingDatePickerView.heightAnchor.constraint(equalTo: datePickerView.heightAnchor, multiplier: 0.22).isActive = true
         
+        datePicker.datePickerMode = .date
         datePickerView.addSubview(datePicker)
         datePicker.translatesAutoresizingMaskIntoConstraints = false
         datePicker.leadingAnchor.constraint(equalTo: datePickerView.leadingAnchor).isActive = true
         datePicker.trailingAnchor.constraint(equalTo: datePickerView.trailingAnchor).isActive = true
         datePicker.topAnchor.constraint(equalTo: headingDatePickerView.bottomAnchor).isActive = true
         datePicker.bottomAnchor.constraint(equalTo: datePickerView.bottomAnchor).isActive = true
+        
+        let cancelButton = UIButton()
+        cancelButton.setTitle("Cancel", for: .normal)
+        cancelButton.setTitleColor(UIColor.white, for: .normal)
+        cancelButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        headingDatePickerView.addSubview(cancelButton)
+        cancelButton.translatesAutoresizingMaskIntoConstraints = false
+        cancelButton.leadingAnchor.constraint(equalTo: headingDatePickerView.leadingAnchor, constant: 8).isActive = true
+        cancelButton.topAnchor.constraint(equalTo: headingDatePickerView.topAnchor).isActive = true
+        cancelButton.bottomAnchor.constraint(equalTo: headingDatePickerView.bottomAnchor).isActive = true
+        cancelButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        cancelButton.addTarget(self, action: #selector(cancelBtnPressed), for: .touchUpInside)
         
         let doneButton = UIButton()
         doneButton.setTitle("Done", for: .normal)
@@ -330,12 +344,18 @@ extension AddSpendVC {
         selectedDateLabel.text = "Please select date"
         selectedDateLabel.textColor = UIColor.white
         selectedDateLabel.font = UIFont(name: "HelveticaNeue-Medium", size: 15)
+        selectedDateLabel.textAlignment = .center
         self.headingDatePickerView.addSubview(selectedDateLabel)
         selectedDateLabel.translatesAutoresizingMaskIntoConstraints = false
         selectedDateLabel.topAnchor.constraint(equalTo: headingDatePickerView.topAnchor).isActive = true
         selectedDateLabel.bottomAnchor.constraint(equalTo: headingDatePickerView.bottomAnchor).isActive = true
-        selectedDateLabel.leadingAnchor.constraint(equalTo: headingDatePickerView.leadingAnchor, constant: 8).isActive = true
-        selectedDateLabel.trailingAnchor.constraint(equalTo: doneButton.leadingAnchor).isActive = true
+        selectedDateLabel.leadingAnchor.constraint(equalTo: cancelButton.trailingAnchor, constant: 8).isActive = true
+        selectedDateLabel.trailingAnchor.constraint(equalTo: doneButton.leadingAnchor, constant: -8).isActive = true
+        
+        let bottomView = UIView()
+        bottomView.backgroundColor = UIColor.lightGray
+        datePickerView.addSubview(bottomView)
+        bottomView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     func setupOverlayView() {
@@ -381,6 +401,29 @@ extension AddSpendVC {
     }
     
     @objc func doneBtnPressed() {
+        let selectedDate = datePicker.date
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.dateFormat = "dd MMM, yyyy"
+        let dateString = dateFormatter.string(from: selectedDate)
+        
+        self.dateLabel.text = dateString
+        
         setupAnimationOnDateView()
+    }
+    
+    @objc func cancelBtnPressed() {
+        setupAnimationOnDateView()
+    }
+}
+
+
+extension AddSpendVC: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == amountTextField {
+            textField.resignFirstResponder()
+        }
+        
+        return true
     }
 }
