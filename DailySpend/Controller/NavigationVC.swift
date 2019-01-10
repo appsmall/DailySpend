@@ -41,6 +41,10 @@ class NavigationVC: UINavigationController {
                         else {
                             // Set selected view controller in the navigation stack
                             self.setViewControllers([selectedVC], animated: false)
+                            
+                            if let addSpendVC = selectedVC as? AddSpendVC {
+                                addSpendVC.containerVC = containerVC
+                            }
                         }
                     }
                 }

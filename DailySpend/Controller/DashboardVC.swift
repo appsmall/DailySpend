@@ -9,10 +9,21 @@
 import UIKit
 
 class DashboardVC: UIViewController {
+    
+    struct Storyboard {
+        static let dashboardVCToProfileVC = "dashboardVCToProfileVC"
+    }
 
     
+    // MARK:- VIEW CONTROLLER METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
+    
+    
+    // MARK:- IBACTIONS
+    @IBAction func profileIconBtnPressed(_ sender: RoundButton) {
+        self.performSegue(withIdentifier: Storyboard.dashboardVCToProfileVC, sender: nil)
+    }
+    
 }

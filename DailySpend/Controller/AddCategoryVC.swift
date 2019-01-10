@@ -51,10 +51,11 @@ class AddCategoryVC: UIViewController {
         let textField = UITextField()
         textField.placeholder = "Enter new category"
         textField.textColor = UIColor.white
+        textField.delegate = self
         return textField
     }()
     
-    lazy var submitButtonForCategory: UIButton = {
+    lazy var submitButton: UIButton = {
         let button = UIButton()
         button.setTitle("Submit", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
@@ -93,13 +94,14 @@ class AddCategoryVC: UIViewController {
     var isSubmitBtnPressedOnSubCategory = false  // to check the submit button tap on which view (category or subcategory view)
     var backArrowBtnHeightConstraint: NSLayoutConstraint!  // update back button height when 'Enter new subcategory'
     var hiddenViewHeight: CGFloat!        // Calculate hiddenView width
+    var enteredCategory = String()
+    var enteredSubCategory = String()
     
     
     // MARK:- VIEW CONTROLLER METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
-        
         self.perform(#selector(updateUIAfterDelay), with: nil, afterDelay: 0.0)
     }
     
@@ -109,8 +111,6 @@ class AddCategoryVC: UIViewController {
     
     // MARK:- CORE FUNCTIONS
     func updateUI() {
-        categoryView.cornerView()
-        
         self.arrowCategoryImageView.transform = CGAffineTransform(rotationAngle: .pi / -2)
         categoryTableView.layer.cornerRadius = 5
         categoryTableView.layer.masksToBounds = true
@@ -118,6 +118,7 @@ class AddCategoryVC: UIViewController {
     
     // used to handle table view height according to their content-size
     @objc func updateUIAfterDelay() {
+        categoryView.cornerView()
         tableViewContentHeight = categoryTableView.contentSize.height
         selectACategoryHeight = categoryView.frame.size.height
         hiddenViewHeight = bottomHiddenViewSelectCat.frame.height
@@ -206,7 +207,7 @@ class AddCategoryVC: UIViewController {
 
     @IBAction func categoryViewTapped(_ sender: UITapGestureRecognizer) {
         self.view.bringSubviewToFront(categoryTableView)
-        hideTableView(selectedCategory: "")
+        hideTableView(selectedCategory: emptyString)
     }
 }
 
@@ -294,29 +295,86 @@ extension AddCategoryVC {
             // When user tap on submit button on Sub-Category View, then
             // Category and SubCategory are successfully saved.
             
-            let actionOk = UIAlertAction(title: "Ok", style: .default) { (action) in
-                _ = self.navigationController?.popToRootViewController(animated: true)
+            if let subCategory = addCategoryTextField.text {
+                // It has some string
+                
+                if subCategory != emptyString {
+                    // Has string
+                    
+                    ////////////////////////////////////////////////////////
+                    //TODO:- ADD THE CATEGORY & SUBCATEGORY FUNCTIONALITY HERE //
+                    ////////////////////////////////////////////////////////
+                    
+                    
+                    let actionOk = UIAlertAction(title: "Ok", style: .default) { (action) in
+                        _ = self.navigationController?.popToRootViewController(animated: true)
+                    }
+                    Utility.alert(on: self, title: "Alert", message: "\(enteredCategory) category and \(enteredSubCategory) subCategory are successfully saved.", withActions: [actionOk], style: .alert)
+                }
+                else {
+                    // Empty String
+                    self.alertWithSingleAction(message: pleaseEnterTheSubCategory)
+                }
             }
-            Utility.alert(on: self, title: "Alert", message: "Category and SubCategory are successfully saved.", withActions: [actionOk], style: .alert)
+            else {
+                // Nil Value
+                self.alertWithSingleAction(message: pleaseEnterTheSubCategory)
+            }
         }
         else {
             // When user tap on submit button on Category View, then
             // Move to Sub-Category View
-            UIView.transition(with: addCategoryView, duration: 0.5, options: .transitionFlipFromLeft, animations: {
-                // Enter new Sub-Category
-                self.backArrowBtnHeightConstraint.constant = 30
-                self.enterNewCatLabel.text = "Enter new sub-category"
-                self.addCategoryTextField.placeholder = "Enter new sub-category"
-                self.isSubmitBtnPressedOnSubCategory = true
-            }, completion: nil)
             
-            self.isSubmitBtnPressedOnSubCategory = true
+            
+            if let category = addCategoryTextField.text {
+                // It has some string
+                
+                if category != emptyString {
+                    // Has some string
+                    
+                    enteredCategory = category
+                    
+                    UIView.transition(with: addCategoryView, duration: 0.5, options: .transitionFlipFromLeft, animations: {
+                        // Enter new Sub-Category
+                        self.backArrowBtnHeightConstraint.constant = 30
+                        self.enterNewCatLabel.text = "Enter new sub-category"
+                        
+                        if self.enteredSubCategory != emptyString {
+                            if !self.isCategory {
+                                self.addCategoryTextField.text = self.enteredSubCategory
+                            }
+                        } else {
+                            self.addCategoryTextField.text = emptyString
+                        }
+                        
+                        self.addCategoryTextField.placeholder = "Enter new sub-category"
+                        self.isSubmitBtnPressedOnSubCategory = true
+                    }, completion: nil)
+                    
+                    self.isSubmitBtnPressedOnSubCategory = true
+                }
+                else {
+                    // Empty string
+                    self.alertWithSingleAction(message: pleaseEnterTheCategory)
+                }
+            }
+            else {
+                // Nil value
+                self.alertWithSingleAction(message: pleaseEnterTheCategory)
+            }
         }
     }
     
     // MARK:- BACK BUTTONS SHOWS (WHEN YOU TAP ON "ADD NEW CATEGORY")
     @objc func backToAddCategoryBtnPressed() {
         // Back to Category View from Sub-Category View
+        
+        if let subCategory = addCategoryTextField.text {
+            enteredSubCategory = subCategory
+        }
+        
+        addCategoryTextField.text = enteredCategory      // If we already entered category, then show the same category string
+        
         UIView.transition(with: addCategoryView, duration: 0.5, options: .transitionFlipFromRight, animations: {
             self.backArrowBtnHeightConstraint.constant = 0
             self.enterNewCatLabel.text = "Enter new category"
@@ -353,8 +411,36 @@ extension AddCategoryVC {
     @objc func subcategoryViewTapped() {
         self.categoryTableView.reloadData()
         tableViewContentHeight = categoryTableView.contentSize.height
-        //showHideSubCategoryTableView(selectedCategory: "")
-        hideTableView(selectedCategory: "")
+        hideTableView(selectedCategory: emptyString)
+    }
+    
+    // MARK:- SUBMIT BUTTON FOR ADDING NEW SUB-CATEGORY ON EXISTING CATEGORY
+    @objc func submitButtonToAddNewSubCatOnExistingCategory() {
+        if let category = categoryLabel.text, let subCategory = addCategoryTextField.text {
+            // It has some value
+            
+            if category != emptyString && subCategory != emptyString {
+                // Both the field has some string
+                
+                
+                ////////////////////////////////////////////////////////
+                //TODO:- ADD THE CATEGORY & SUBCATEGORY FUNCTIONALITY HERE //
+                ////////////////////////////////////////////////////////
+                
+                let actionOk = UIAlertAction(title: Alert.ok, style: .default) { (action) in
+                    _ = self.navigationController?.popToRootViewController(animated: true)
+                }
+                Utility.alert(on: self, title: "Add New Category", message: "\(subCategory) is successfully added in \(category).", withActions: [actionOk], style: .alert)
+            }
+            else {
+                // Atleast one of the field is empty.
+                self.alertWithSingleAction(message: atleastOneOfTheFieldIsEmpty)
+            }
+        }
+        else {
+            // Nil value
+            self.alertWithSingleAction(message: atleastOneOfTheFieldIsEmpty)
+        }
     }
 }
 
@@ -388,11 +474,20 @@ extension AddCategoryVC {
         enterNewCatLabel.topAnchor.constraint(equalTo: addCategoryView.topAnchor, constant: 10).isActive = true
         enterNewCatLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
+        // Hidden View1 in between enterANewCatLabel and addCategoryTFView
+        let hiddenView1 = UIView()
+        addCategoryView.addSubview(hiddenView1)
+        hiddenView1.translatesAutoresizingMaskIntoConstraints = false
+        hiddenView1.leadingAnchor.constraint(equalTo: addCategoryView.leadingAnchor, constant: 0).isActive = true
+        hiddenView1.trailingAnchor.constraint(equalTo: addCategoryView.trailingAnchor, constant: 0).isActive = true
+        hiddenView1.heightAnchor.constraint(equalTo: addCategoryView.heightAnchor, multiplier: 0.05).isActive = true
+        hiddenView1.topAnchor.constraint(equalTo: enterNewCatLabel.bottomAnchor, constant: 0).isActive = true
+        
         addCategoryView.addSubview(addCategoryTFView)
         addCategoryTFView.translatesAutoresizingMaskIntoConstraints = false
         addCategoryTFView.leadingAnchor.constraint(equalTo: addCategoryView.leadingAnchor, constant: 10).isActive = true
         addCategoryTFView.trailingAnchor.constraint(equalTo: addCategoryView.trailingAnchor, constant: -10).isActive = true
-        addCategoryTFView.topAnchor.constraint(equalTo: enterNewCatLabel.bottomAnchor, constant: 10).isActive = true
+        addCategoryTFView.topAnchor.constraint(equalTo: hiddenView1.bottomAnchor, constant: 0).isActive = true
         addCategoryTFView.heightAnchor.constraint(equalTo: addCategoryView.heightAnchor, multiplier: 0.3).isActive = true
         
         addCategoryTFView.addSubview(addCategoryTextField)
@@ -402,13 +497,22 @@ extension AddCategoryVC {
         addCategoryTextField.topAnchor.constraint(equalTo: addCategoryTFView.topAnchor, constant: 2).isActive = true
         addCategoryTextField.bottomAnchor.constraint(equalTo: addCategoryTFView.bottomAnchor, constant: 2).isActive = true
         
-        addCategoryView.addSubview(submitButtonForCategory)
-        submitButtonForCategory.translatesAutoresizingMaskIntoConstraints = false
-        submitButtonForCategory.centerXAnchor.constraint(equalTo: addCategoryView.centerXAnchor).isActive = true
-        submitButtonForCategory.widthAnchor.constraint(equalTo: addCategoryView.widthAnchor, multiplier: 0.5).isActive = true
-        submitButtonForCategory.bottomAnchor.constraint(equalTo: addCategoryView.bottomAnchor, constant: -10).isActive = true
-        submitButtonForCategory.heightAnchor.constraint(equalTo: addCategoryView.heightAnchor, multiplier: 0.25).isActive = true
-        submitButtonForCategory.addTarget(self, action: #selector(submitBtnPressed), for: .touchUpInside)
+        // Hidden View2 in between addCategoryTFView and submitButton
+        let hiddenView2 = UIView()
+        addCategoryView.addSubview(hiddenView2)
+        hiddenView2.translatesAutoresizingMaskIntoConstraints = false
+        hiddenView2.leadingAnchor.constraint(equalTo: addCategoryView.leadingAnchor, constant: 0).isActive = true
+        hiddenView2.trailingAnchor.constraint(equalTo: addCategoryView.trailingAnchor, constant: 0).isActive = true
+        hiddenView2.heightAnchor.constraint(equalTo: addCategoryView.heightAnchor, multiplier: 0.1).isActive = true
+        hiddenView2.topAnchor.constraint(equalTo: addCategoryTFView.bottomAnchor, constant: 0).isActive = true
+        
+        addCategoryView.addSubview(submitButton)
+        submitButton.translatesAutoresizingMaskIntoConstraints = false
+        submitButton.centerXAnchor.constraint(equalTo: addCategoryView.centerXAnchor).isActive = true
+        submitButton.widthAnchor.constraint(equalTo: addCategoryView.widthAnchor, multiplier: 0.5).isActive = true
+        submitButton.topAnchor.constraint(equalTo: hiddenView2.bottomAnchor, constant: 0).isActive = true
+        submitButton.heightAnchor.constraint(equalTo: addCategoryView.heightAnchor, multiplier: 0.23).isActive = true
+        submitButton.addTarget(self, action: #selector(submitBtnPressed), for: .touchUpInside)
     }
     
     // MARK:- SETUP VIEWS WHEN YOU TAP ANY OF THE CATEGORY EXCEPT "ADD NEW CATEGORY"
@@ -452,16 +556,17 @@ extension AddCategoryVC {
     
     // MARK:- SETUP SUBMIT BUTTON WHEN YOU TAP ON ANY SUB-CATEGORY EXCEPT "ADD NEW SUB-CATEGORY"
     func showSubmitButtonOnSelectionOnSubCategory(_ topBindView: UIView) {
-        self.view.addSubview(self.submitButtonForCategory)
-        self.submitButtonForCategory.translatesAutoresizingMaskIntoConstraints = false
-        submitBtnTopConstraint = self.submitButtonForCategory.topAnchor.constraint(equalTo: topBindView.topAnchor)
+        self.view.addSubview(self.submitButton)
+        self.submitButton.translatesAutoresizingMaskIntoConstraints = false
+        submitBtnTopConstraint = self.submitButton.topAnchor.constraint(equalTo: topBindView.topAnchor)
         submitBtnTopConstraint.isActive = true
-        submitBtnHeightConstraint = self.submitButtonForCategory.heightAnchor.constraint(equalTo: self.addCategoryView.heightAnchor, multiplier: 0)
+        submitBtnHeightConstraint = self.submitButton.heightAnchor.constraint(equalTo: self.addCategoryView.heightAnchor, multiplier: 0)
         submitBtnHeightConstraint.isActive = true
-        self.submitButtonForCategory.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        self.submitButtonForCategory.widthAnchor.constraint(equalTo: self.addCategoryView.widthAnchor, multiplier: 0.6).isActive = true
+        submitButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        submitButton.widthAnchor.constraint(equalTo: addCategoryView.widthAnchor, multiplier: 0.6).isActive = true
+        submitButton.addTarget(self, action: #selector(submitButtonToAddNewSubCatOnExistingCategory), for: .touchUpInside)
         
-        submitButtonForCategory.backgroundColor = UIColor.rgb(red: 56, green: 57, blue: 43)
+        submitButton.backgroundColor = UIColor(white: 0.8, alpha: 0.6)
     }
     
     // MARK:- SETUP TEXT FIELD VIEW WHEN YOU TAP ON "ADD NEW SUB-CATEGORY"
@@ -481,11 +586,9 @@ extension AddCategoryVC {
         addCategoryTextField.trailingAnchor.constraint(equalTo: addNewSubCatView.trailingAnchor, constant: -10).isActive = true
         addCategoryTextField.topAnchor.constraint(equalTo: addNewSubCatView.topAnchor, constant: 2).isActive = true
         addCategoryTextField.bottomAnchor.constraint(equalTo: addNewSubCatView.bottomAnchor, constant: 2).isActive = true
+        addCategoryTextField.attributedPlaceholder = NSAttributedString(string: "Enter new sub-category", attributes: [NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 225, green: 225, blue: 225)])
         
         showSubmitButtonOnSelectionOnSubCategory(addNewSubCatView)
-        
-        addCategoryTextField.attributedPlaceholder = NSAttributedString(string: "Enter new sub-category", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-        addCategoryTextField.attributedPlaceholder = NSAttributedString(string: "", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
     }
 }
 
@@ -541,7 +644,22 @@ extension AddCategoryVC {
     func submitButtonAnimation() {
         self.submitBtnHeightConstraint.constant = self.selectACategoryHeight
         self.submitBtnTopConstraint.constant = self.addCategoryView.frame.height + self.hiddenViewHeight
-        self.submitButtonForCategory.layer.cornerRadius = self.selectACategoryHeight / 2
-        self.submitButtonForCategory.layer.masksToBounds = true
+        self.submitButton.layer.cornerRadius = self.selectACategoryHeight / 2
+        self.submitButton.layer.masksToBounds = true
+    }
+}
+
+
+extension AddCategoryVC: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == addCategoryTextField {
+            textField.resignFirstResponder()
+        }
+        
+        return true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
 }
