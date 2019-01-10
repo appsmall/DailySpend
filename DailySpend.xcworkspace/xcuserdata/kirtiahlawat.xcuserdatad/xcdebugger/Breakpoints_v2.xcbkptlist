@@ -26,12 +26,12 @@
                   moduleName = "DailySpend"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Volumes/Storage/Swift%20Learning/DailySpend/DailySpend/Firebase/FirebaseManager.swift"
-                  timestampString = "561831895.638956"
+                  timestampString = "568831933.981077"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "61"
                   endingLineNumber = "61"
-                  offsetFromSymbolStart = "2074">
+                  offsetFromSymbolStart = "2063">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -41,7 +41,7 @@
                   moduleName = "DailySpend"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Volumes/Storage/Swift%20Learning/DailySpend/DailySpend/Firebase/FirebaseManager.swift"
-                  timestampString = "561831895.6442159"
+                  timestampString = "568831933.984097"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "62"
@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DailySpend/Utility/Utility.swift"
-            timestampString = "561817681.008166"
+            timestampString = "568831933.692342"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "17"
@@ -74,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DailySpend/Utility/Utility.swift"
-            timestampString = "561817681.008507"
+            timestampString = "568831933.693223"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "25"
@@ -122,45 +122,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DailySpend/Model/User.swift"
-            timestampString = "561831895.358004"
+            timestampString = "568831933.693651"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "171"
             endingLineNumber = "171"
             landmarkName = "updateCategories()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "DailySpend.User.(updateCategories in _ACB2F5A13F7683F6213E913719331F75)() -&gt; ()"
-                  moduleName = "DailySpend"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/Storage/Swift%20Learning/DailySpend/DailySpend/Model/User.swift"
-                  timestampString = "561831895.672667"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "171"
-                  endingLineNumber = "171"
-                  offsetFromSymbolStart = "26">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Bool, Swift.Optional&lt;Swift.Array&lt;DailySpend.Category&gt;&gt;) -&gt; () in DailySpend.User.(updateCategories in _ACB2F5A13F7683F6213E913719331F75)() -&gt; ()"
-                  moduleName = "DailySpend"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/Storage/Swift%20Learning/DailySpend/DailySpend/Model/User.swift"
-                  timestampString = "561831895.674984"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "172"
-                  endingLineNumber = "172"
-                  offsetFromSymbolStart = "43">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -170,7 +138,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DailySpend/Model/User.swift"
-            timestampString = "561831895.358853"
+            timestampString = "568831933.694519"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "172"
