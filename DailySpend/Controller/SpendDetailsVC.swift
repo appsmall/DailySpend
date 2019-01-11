@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import FSCalendar
 
 class SpendDetailsVC: UIViewController {
     struct Storyboard {
         static let kCellId = "SpendDetailCell"
     }
 
+    @IBOutlet weak var calendarView: FSCalendar!
     @IBOutlet weak var spendDetailTableView: UITableView!
     
     var spendDetails = [ExpandableNames(isExpanded: false, category: "Grocery", subCategory: ["Misc", "Others"]),
@@ -147,4 +149,39 @@ extension SpendDetailsVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
     }
+}
+
+// MARK:- FSCALENDAR DATA SOURCE & DELEGATE METHODS
+extension SpendDetailsVC: FSCalendarDataSource, FSCalendarDelegate {
+    
+    // Show 'Food' string in place of Date
+    /*func calendar(_ calendar: FSCalendar, titleFor date: Date) -> String? {
+        return "Food"
+    }
+    
+    // Show 'Food' string in the bottom of the Date
+    func calendar(_ calendar: FSCalendar, subtitleFor date: Date) -> String? {
+        return "Food"
+    }
+    
+    // Show image in place of Date
+    func calendar(_ calendar: FSCalendar, imageFor date: Date) -> UIImage? {
+        return UIImage(named: "ic_camera")
+    }
+    
+    // This method will called when you swipe the view
+    func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
+     
+    }*/
+    
+     // This method will called when you select the date
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        print("Selected Date: \(date)")
+    }
+    
+     // This method will called when you deselect the date
+    func calendar(_ calendar: FSCalendar, didDeselect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        print("Deselected Date: \(date)")
+    }
+    
 }

@@ -2110,7 +2110,7 @@
             </objects>
             <point key="canvasLocation" x="5419" y="874"/>
         </scene>
-        <!--Spend DetailsVC-->
+        <!--Data Source-->
         <scene sceneID="iqg-ZN-y5E">
             <objects>
                 <viewController storyboardIdentifier="SpendDetailsVC" id="cqu-A5-BZg" customClass="SpendDetailsVC" customModule="DailySpend" customModuleProvider="target" sceneMemberID="viewController">
@@ -2139,17 +2139,29 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="svk-vG-NfA" userLabel="Hidden View">
-                                <rect key="frame" x="0.0" y="70" width="320" height="20"/>
+                                <rect key="frame" x="0.0" y="70" width="320" height="11.5"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G15-2j-mz2" userLabel="Calendar View">
-                                <rect key="frame" x="0.0" y="90" width="320" height="198.5"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G15-2j-mz2" userLabel="Calendar View" customClass="FSCalendar">
+                                <rect key="frame" x="0.0" y="81.5" width="320" height="198.5"/>
+                                <color key="backgroundColor" red="0.50588235290000005" green="0.40000000000000002" blue="0.32156862749999998" alpha="0.96311733131288346" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="headerTitleColor">
+                                        <color key="value" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="weekdayTextColor">
+                                        <color key="value" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="dataSource" destination="cqu-A5-BZg" id="JiX-DI-0fa"/>
+                                    <outlet property="delegate" destination="cqu-A5-BZg" id="7cc-tp-r3d"/>
+                                </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gVA-aw-6Mq" userLabel="Hidden View">
-                                <rect key="frame" x="0.0" y="288.5" width="320" height="14.5"/>
+                                <rect key="frame" x="0.0" y="280" width="320" height="14.5"/>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hrK-A9-fTU">
-                                <rect key="frame" x="20" y="303" width="280" height="265"/>
+                                <rect key="frame" x="20" y="294.5" width="280" height="273.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SpendDetailCell" id="2OR-Dr-XYW">
@@ -2198,7 +2210,7 @@
                             <constraint firstItem="hrK-A9-fTU" firstAttribute="top" secondItem="gVA-aw-6Mq" secondAttribute="bottom" id="PNm-q4-8WR"/>
                             <constraint firstItem="onD-8o-QJC" firstAttribute="trailing" secondItem="G15-2j-mz2" secondAttribute="trailing" id="PRC-y6-0Hn"/>
                             <constraint firstItem="h2C-Dv-GtW" firstAttribute="leading" secondItem="onD-8o-QJC" secondAttribute="leading" id="QO8-7R-cN3"/>
-                            <constraint firstItem="svk-vG-NfA" firstAttribute="height" secondItem="f7S-gB-nk9" secondAttribute="height" multiplier="0.035" id="Sig-Ae-kfK"/>
+                            <constraint firstItem="svk-vG-NfA" firstAttribute="height" secondItem="f7S-gB-nk9" secondAttribute="height" multiplier="0.02" id="Sig-Ae-kfK"/>
                             <constraint firstItem="svk-vG-NfA" firstAttribute="top" secondItem="h2C-Dv-GtW" secondAttribute="bottom" id="WDE-1r-zf0"/>
                             <constraint firstItem="wL7-ro-lc6" firstAttribute="top" secondItem="f7S-gB-nk9" secondAttribute="top" id="b1y-gM-dJS"/>
                             <constraint firstItem="gVA-aw-6Mq" firstAttribute="top" secondItem="G15-2j-mz2" secondAttribute="bottom" id="cXL-xA-tgE"/>
@@ -2211,6 +2223,7 @@
                         <viewLayoutGuide key="safeArea" id="onD-8o-QJC"/>
                     </view>
                     <connections>
+                        <outlet property="calendarView" destination="G15-2j-mz2" id="dHU-BQ-wXX"/>
                         <outlet property="spendDetailTableView" destination="hrK-A9-fTU" id="RvN-LP-Jbs"/>
                     </connections>
                 </viewController>

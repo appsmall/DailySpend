@@ -8,6 +8,7 @@ target 'DailySpend' do
   # Pods for DailySpend
  pod 'Firebase/Core'
  pod 'Firebase/Database'
+ pod 'FSCalendar'
 
 
 
