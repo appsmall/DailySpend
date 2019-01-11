@@ -86,6 +86,11 @@ class AddSpendVC: UIViewController {
         self.subCatArrowImageView.transform = CGAffineTransform(rotationAngle: .pi / -2)
         self.view.bringSubviewToFront(categoryTableView)
         self.view.bringSubviewToFront(subCatTableView)
+        
+        categoryTableView.layer.cornerRadius = 5
+        categoryTableView.layer.masksToBounds = true
+        subCatTableView.layer.cornerRadius = 5
+        subCatTableView.layer.masksToBounds = true
         categoryTableView.rowHeight = UITableView.automaticDimension
         subCatTableView.rowHeight = UITableView.automaticDimension
         
