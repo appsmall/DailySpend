@@ -37,7 +37,7 @@ class NavigationVC: UINavigationController {
                     if let presentedVC = self.viewControllers.first {
                         if selectedVC.classForCoder == presentedVC.classForCoder {
                             // Nothing will do when click on same view controller
-                            //
+                            //     ///////
                         }
                         else {
                             // Set selected view controller in the navigation stack
