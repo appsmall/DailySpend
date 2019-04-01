@@ -12,6 +12,8 @@ class ViewController: UIViewController {
     
     var category = [Category]()
 
+    
+    // MARK:- VIEW CONTROLLER LIFE CYCLE METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
